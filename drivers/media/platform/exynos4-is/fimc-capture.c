@@ -575,7 +575,7 @@ static int fimc_capture_release(struct file *file)
 	if (v4l2_fh_is_singular_file(file))
 		fimc_ctrls_delete(fimc->vid_cap.ctx);
 
-	ret = vb2_fop_release(file);
+	ret = _vb2_fop_release(file, NULL);
 	mutex_unlock(&fimc->lock);
 
 	return ret;

@@ -1266,7 +1266,7 @@ static int coda_start_streaming(struct vb2_queue *q, unsigned int count)
 	return 0;
 }
 
-static int coda_stop_streaming(struct vb2_queue *q)
+static void coda_stop_streaming(struct vb2_queue *q)
 {
 	struct coda_ctx *ctx = vb2_get_drv_priv(q);
 	struct coda_dev *dev = ctx->dev;
@@ -1299,12 +1299,10 @@ static int coda_stop_streaming(struct vb2_queue *q)
 	if (coda_command_sync(ctx, CODA_COMMAND_SEQ_END)) {
 		v4l2_err(&dev->v4l2_dev,
 			 "CODA_COMMAND_SEQ_END failed\n");
-		return -ETIMEDOUT;
+		return;
 	}
 
 	coda_free_framebuffers(ctx);
-
-	return 0;
 }
 
 static struct vb2_ops coda_qops = {

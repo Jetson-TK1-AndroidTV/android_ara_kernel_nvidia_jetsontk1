@@ -373,6 +373,7 @@ struct v4l2_fh;
  * @streaming:	current streaming state
  * @start_streaming_called: start_streaming() was called successfully and we
  *		started streaming.
+ * @error:	a fatal error occurred on the queue
  * @fileio:	file io emulator internal data, used only if emulator is active
  * @threadio:	thread io internal data, used only if thread is active
  */
@@ -409,6 +410,7 @@ struct vb2_queue {
 
 	unsigned int			streaming:1;
 	unsigned int			start_streaming_called:1;
+	unsigned int			error:1;
 
 	struct vb2_fileio_data		*fileio;
 	struct vb2_threadio_data	*threadio;
@@ -442,6 +444,7 @@ int vb2_prepare_buf(struct vb2_queue *q, struct v4l2_buffer *b);
 int __must_check vb2_queue_init(struct vb2_queue *q);
 
 void vb2_queue_release(struct vb2_queue *q);
+void vb2_queue_error(struct vb2_queue *q);
 
 int vb2_qbuf(struct vb2_queue *q, struct v4l2_buffer *b);
 int vb2_expbuf(struct vb2_queue *q, struct v4l2_exportbuffer *eb);

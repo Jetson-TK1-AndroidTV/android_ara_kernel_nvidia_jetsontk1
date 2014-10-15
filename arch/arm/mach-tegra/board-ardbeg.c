@@ -1652,6 +1652,9 @@ DT_MACHINE_START(ARDBEG_SATA, "ardbeg_sata")
 MACHINE_END
 
 DT_MACHINE_START(JETSON_TK1, "jetson-tk1")
+#if defined(CONFIG_ZONE_DMA) && defined(CONFIG_ARM_LPAE)
+	.dma_zone_size	= (4UL * SZ_1G),
+#endif
 	.atag_offset	= 0x100,
 	.smp		= smp_ops(tegra_smp_ops),
 	.map_io		= tegra_map_common_io,

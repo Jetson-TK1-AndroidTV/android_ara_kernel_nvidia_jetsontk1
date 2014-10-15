@@ -1413,7 +1413,7 @@ static int tegra_usb_set_charging_current(struct tegra_udc *udc, bool charger_de
 			dev_info(dev, "connected to SDP\n");
 		max_ua = min(udc->current_limit * 1000,
 				USB_CHARGING_SDP_CURRENT_LIMIT_UA);
-		if (udc->charging_supported && !USB_drive_strength_test && charger_detect)
+		if (udc->charging_supported && charger_detect)
 			schedule_delayed_work(&udc->non_std_charger_work,
 				msecs_to_jiffies(NON_STD_CHARGER_DET_TIME_MS));
 		tegra_udc_notify_event(udc, USB_EVENT_VBUS);

@@ -362,6 +362,9 @@ static void ardbeg_audio_init(void)
 		ardbeg_audio_pdata_rt5639.gpio_ldo1_en = TEGRA_GPIO_LDO_EN;
 	}
 
+	if (board_info.board_id == BOARD_PM375)
+		ardbeg_audio_pdata_rt5639.gpio_hp_det_active_high = 0;
+
 	if (board_info.board_id == BOARD_E1971) {
 		ardbeg_audio_pdata_rt5639.gpio_hp_det = TEGRA_GPIO_CDC_IRQ;
 		ardbeg_audio_pdata_rt5639.use_codec_jd_irq = true;

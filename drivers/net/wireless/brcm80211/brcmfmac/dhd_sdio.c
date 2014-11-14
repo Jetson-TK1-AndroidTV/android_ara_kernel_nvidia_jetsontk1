@@ -3557,6 +3557,10 @@ static bool brcmf_sdbrcm_chipmatch(u16 chipid)
 		return true;
 	if (chipid == BCM4334_CHIP_ID)
 		return true;
+	if (chipid == BCM43340_CHIP_ID)
+		return true;
+	if (chipid == BCM43341_CHIP_ID)
+		return true;
 	if (chipid == BCM4335_CHIP_ID)
 		return true;
 	return false;

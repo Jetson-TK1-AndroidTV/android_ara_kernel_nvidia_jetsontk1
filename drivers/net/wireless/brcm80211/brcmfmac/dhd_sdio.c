@@ -314,8 +314,8 @@ struct rte_console {
 /* Flags for SDH calls */
 #define F2SYNC	(SDIO_REQ_4BYTE | SDIO_REQ_FIXED)
 
-#define BRCMF_SDIO_FW_NAME	"brcm/brcmfmac-sdio.bin"
-#define BRCMF_SDIO_NV_NAME	"brcm/brcmfmac-sdio.txt"
+#define BRCMF_SDIO_FW_NAME	"brcm/brcmfmac43340-sdio.bin"
+#define BRCMF_SDIO_NV_NAME	"brcm/brcmfmac43340-sdio.txt"
 MODULE_FIRMWARE(BRCMF_SDIO_FW_NAME);
 MODULE_FIRMWARE(BRCMF_SDIO_NV_NAME);
 #define BRCMF_SDIO_4329_FW_NAME	"brcm/brcmfmac-sdio-4329.bin"
@@ -3590,6 +3590,10 @@ static bool brcmf_sdbrcm_chipmatch(u16 chipid)
 	if (chipid == BCM4330_CHIP_ID)
 		return true;
 	if (chipid == BCM4334_CHIP_ID)
+		return true;
+	if (chipid == BCM43340_CHIP_ID)
+		return true;
+	if (chipid == BCM43341_CHIP_ID)
 		return true;
 	if (chipid == BCM4335_CHIP_ID)
 		return true;

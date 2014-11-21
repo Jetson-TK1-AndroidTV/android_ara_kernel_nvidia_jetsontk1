@@ -1505,6 +1505,7 @@ static void __init tegra_ardbeg_reserve(void)
 #endif /* CONFIG_FRAMEBUFFER_CONSOLE */
 
 #ifdef CONFIG_TEGRA_HDMI_PRIMARY
+	fb2_size = SZ_64M + SZ_4M;
 	tmp = fb1_size;
 	fb1_size = fb2_size;
 	fb2_size = tmp;

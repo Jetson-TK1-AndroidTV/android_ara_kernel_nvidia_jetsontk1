@@ -586,9 +586,9 @@ void tegra_fb_update_monspecs(struct tegra_fb_info *fb_info,
 {
 	struct fb_event event;
 	int i;
-#ifdef CONFIG_FRAMEBUFFER_CONSOLE
+#if defined(CONFIG_FRAMEBUFFER_CONSOLE) || defined(CONFIG_TEGRA_HDMI_PRIMARY)
 	struct tegra_dc_mode dcmode;
-#endif /* CONFIG_FRAMEBUFFER_CONSOLE */
+#endif /* CONFIG_FRAMEBUFFER_CONSOLE || CONFIG_TEGRA_HDMI_PRIMARY */
 
 	mutex_lock(&fb_info->info->lock);
 	fb_destroy_modedb(fb_info->info->monspecs.modedb);
@@ -630,7 +630,7 @@ void tegra_fb_update_monspecs(struct tegra_fb_info *fb_info,
 	}
 
 	event.info = fb_info->info;
-#ifdef CONFIG_FRAMEBUFFER_CONSOLE
+#if defined(CONFIG_FRAMEBUFFER_CONSOLE) || defined(CONFIG_TEGRA_HDMI_PRIMARY)
 	console_lock();
 	fb_notifier_call_chain(FB_EVENT_NEW_MODELIST, &event);
 	dcmode.pclk          = specs->modedb[0].pixclock;

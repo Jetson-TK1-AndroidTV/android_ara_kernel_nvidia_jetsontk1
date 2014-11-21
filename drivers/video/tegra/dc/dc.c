@@ -70,9 +70,9 @@
 #include "tegra_adf.h"
 #endif
 
-#ifdef CONFIG_FRAMEBUFFER_CONSOLE
+#if defined(CONFIG_FRAMEBUFFER_CONSOLE) || defined(CONFIG_TEGRA_HDMI_PRIMARY)
 #include "hdmi.h"
-#endif /* CONFIG_FRAMEBUFFER_CONSOLE */
+#endif /* CONFIG_FRAMEBUFFER_CONSOLE  || CONFIG_TEGRA_HDMI_PRIMARY */
 
 /* HACK! This needs to come from DT */
 #include "../../../../arch/arm/mach-tegra/iomap.h"
@@ -3135,7 +3135,7 @@ static int tegra_dc_probe(struct platform_device *ndev)
 	}
 	dc->mode_dirty = false; /* ignore changes tegra_dc_set_out has done */
 
-#ifdef CONFIG_FRAMEBUFFER_CONSOLE
+#if defined(CONFIG_FRAMEBUFFER_CONSOLE) || defined(CONFIG_TEGRA_HDMI_PRIMARY)
 	if (dc->out && dc->out->n_modes &&
 	    (dc->out->type == TEGRA_DC_OUT_HDMI)) {
 		struct fb_monspecs specs;
@@ -3160,7 +3160,7 @@ static int tegra_dc_probe(struct platform_device *ndev)
 			dc->pdata->fb->yres = dcmode->v_active;
 		}
 	}
-#endif /* CONFIG_FRAMEBUFFER_CONSOLE */
+#endif /* CONFIG_FRAMEBUFFER_CONSOLE  || CONFIG_TEGRA_HDMI_PRIMARY */
 
 #ifndef CONFIG_TEGRA_ISOMGR
 		/*

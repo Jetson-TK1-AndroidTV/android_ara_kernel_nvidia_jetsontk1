@@ -232,7 +232,7 @@ static void handle_check_edid_l(struct tegra_dc_hdmi_data *hdmi)
 #endif
 
 	memset(&specs, 0, sizeof(specs));
-#ifdef CONFIG_FRAMEBUFFER_CONSOLE
+#if defined(CONFIG_FRAMEBUFFER_CONSOLE) || defined(CONFIG_TEGRA_HDMI_PRIMARY)
 	/* Set default videomode on dc before enabling it*/
 	tegra_dc_set_default_videomode(hdmi->dc);
 #endif

@@ -511,6 +511,8 @@ static int brcmf_sdio_chip_recognition(struct brcmf_sdio_dev *sdiodev,
 		ci->ramsize = 0x48000;
 		break;
 	case BCM4334_CHIP_ID:
+	case BCM43340_CHIP_ID:
+	case BCM43341_CHIP_ID:
 		ci->c_inf[0].wrapbase = 0x18100000;
 		ci->c_inf[0].cib = 0x29004211;
 		ci->c_inf[1].id = BCMA_CORE_SDIO_DEV;

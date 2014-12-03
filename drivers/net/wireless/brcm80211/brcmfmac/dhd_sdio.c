@@ -314,8 +314,8 @@ struct rte_console {
 /* Flags for SDH calls */
 #define F2SYNC	(SDIO_REQ_4BYTE | SDIO_REQ_FIXED)
 
-#define BRCMF_SDIO_FW_NAME	"brcm/brcmfmac-sdio.bin"
-#define BRCMF_SDIO_NV_NAME	"brcm/brcmfmac-sdio.txt"
+#define BRCMF_SDIO_FW_NAME	"brcm/brcmfmac43340-sdio.bin"
+#define BRCMF_SDIO_NV_NAME	"brcm/brcmfmac43340-sdio.txt"
 MODULE_FIRMWARE(BRCMF_SDIO_FW_NAME);
 MODULE_FIRMWARE(BRCMF_SDIO_NV_NAME);
 #define BRCMF_SDIO_4329_FW_NAME	"brcm/brcmfmac-sdio-4329.bin"
@@ -3479,14 +3479,8 @@ void brcmf_sdbrcm_isr(void *arg)
 	if (!bus->intr)
 		brcmf_err("isr w/o interrupt configured!\n");
 
-#ifndef CONFIG_BRCMFMAC_SDIO_OOB
-#error TODO - make brcmf_sdbrcm_dpc return bool
-	while (brcmf_sdbrcm_dpc(bus))
-		;
-#else
 	brcmf_sdbrcm_adddpctsk(bus);
 	queue_work(bus->brcmf_wq, &bus->datawork);
-#endif
 }
 
 static bool brcmf_sdbrcm_bus_watchdog(struct brcmf_sdio *bus)

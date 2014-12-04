@@ -278,10 +278,6 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		if (rval)
 			return rval;
 
-		rval = v4l2_subdev_call(sd, pad, get_crop, subdev_fh, crop);
-		if (rval != -ENOIOCTLCMD)
-			return rval;
-
 		memset(&sel, 0, sizeof(sel));
 		sel.which = crop->which;
 		sel.pad = crop->pad;
@@ -301,10 +297,6 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 
 		rval = check_crop(sd, crop);
 		if (rval)
-			return rval;
-
-		rval = v4l2_subdev_call(sd, pad, set_crop, subdev_fh, crop);
-		if (rval != -ENOIOCTLCMD)
 			return rval;
 
 		memset(&sel, 0, sizeof(sel));

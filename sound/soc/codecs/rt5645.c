@@ -1717,7 +1717,6 @@ static int rt5645_hp_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
 	struct snd_soc_codec *codec = w->codec;
-	struct rt5645_priv *rt5645 = snd_soc_codec_get_drvdata(codec);
 
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
@@ -2164,13 +2163,16 @@ static int rt5645_micbias2_event(struct snd_soc_dapm_widget *w,
 static int rt5645_post_event(struct snd_soc_dapm_widget *w,
 	struct snd_kcontrol *kcontrol, int event)
 {
-	struct snd_soc_codec *codec = w->codec;
 
 	switch (event) {
 	case SND_SOC_DAPM_POST_PMU:
 #ifdef USE_ASRC
+	{
+		struct snd_soc_codec *codec = w->codec;
+
 		snd_soc_write(codec, RT5645_ASRC_1, 0xffff);
 		snd_soc_write(codec, RT5645_ASRC_2, 0x1111);
+	}
 #endif
 
 		break;
@@ -2883,7 +2885,7 @@ static const struct snd_soc_dapm_route rt5645_dapm_routes[] = {
 
 static int get_sdp_info(struct snd_soc_codec *codec, int dai_id)
 {
-	int ret = 0, val;
+	int ret = 0;
 
 	if (codec == NULL)
 		return -EINVAL;
@@ -3126,7 +3128,8 @@ static int rt5645_pll_calc(const unsigned int freq_in,
 
 	if (RT5645_PLL_INP_MAX < freq_in || RT5645_PLL_INP_MIN > freq_in)
 		return -EINVAL;
-
+	n = 0;
+	m = 0;
 	k = 100000000 / freq_out - 2;
 	if (k > RT5645_PLL_K_MAX)
 		k = RT5645_PLL_K_MAX;
@@ -3387,7 +3390,7 @@ static ssize_t rt5645_codec_store(struct device *dev,struct device_attribute *at
 	unsigned int val=0,addr=0;
 	int i;
 
-	printk("register \"%s\" count=%d\n",buf,count);
+	printk("register \"%s\" count=%d\n",buf,(int)count);
 	for (i = 0; i < count; i++) //address
 	{
 		if (*(buf + i) <= '9' && *(buf + i) >= '0')

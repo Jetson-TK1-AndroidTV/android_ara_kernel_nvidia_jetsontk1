@@ -76,6 +76,7 @@ static struct ov5645 *to_ov5645(struct v4l2_subdev *sd)
 	return container_of(sd, struct ov5645, subdev);
 }
 
+#if 0
 static int ov5645_reg_read(struct i2c_client *client, u16 reg, u8 *val)
 {
 	/* We have 16-bit i2c addresses - care for endianess */
@@ -122,7 +123,6 @@ static int ov5645_reg_read16(struct i2c_client *client, u16 reg, u16 *val16)
 	return 0;
 }
 
-#if 0
 static int ov5645_reg_write(struct i2c_client *client, u16 reg, u8 val)
 {
 	unsigned char data[3] = { reg >> 8, reg & 0xff, val };
@@ -375,9 +375,17 @@ static int ov5645_detect_sensor(struct ov5645 *ov5645)
 		return ret;
 
 	/* Read sensor Model ID */
+#if 0
 	ret = ov5645_reg_read16(ov5645->client, REG_CHIP_ID_LOW, &id);
 	if (ret < 0)
 		goto done;
+#else
+	/*
+	 * We have no I2C access to the device for the Google I/O demo as
+	 * everything is configured by the firmware. Just fake the ID for now.
+	 */
+	id = 0x5645;
+#endif
 
 	dev_info(&ov5645->client->dev, "Chip ID 0x%04x detected\n", id);
 

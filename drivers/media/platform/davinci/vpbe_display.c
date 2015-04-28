@@ -374,13 +374,13 @@ static int vpbe_start_streaming(struct vb2_queue *vq, unsigned int count)
 	return ret;
 }
 
-static int vpbe_stop_streaming(struct vb2_queue *vq)
+static void vpbe_stop_streaming(struct vb2_queue *vq)
 {
 	struct vpbe_fh *fh = vb2_get_drv_priv(vq);
 	struct vpbe_layer *layer = fh->layer;
 
 	if (!vb2_is_streaming(vq))
-		return 0;
+		return;
 
 	/* release all active buffers */
 	while (!list_empty(&layer->dma_queue)) {
@@ -389,8 +389,6 @@ static int vpbe_stop_streaming(struct vb2_queue *vq)
 		list_del(&layer->next_frm->list);
 		vb2_buffer_done(&layer->next_frm->vb, VB2_BUF_STATE_ERROR);
 	}
-
-	return 0;
 }
 
 static struct vb2_ops video_qops = {
@@ -1415,7 +1413,7 @@ static int vpbe_display_reqbufs(struct file *file, void *priv,
 	q->ops = &video_qops;
 	q->mem_ops = &vb2_dma_contig_memops;
 	q->buf_struct_size = sizeof(struct vpbe_disp_buffer);
-	q->timestamp_type = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
+	q->timestamp_flags = V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC;
 
 	ret = vb2_queue_init(q);
 	if (ret) {

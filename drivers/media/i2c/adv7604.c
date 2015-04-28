@@ -1595,8 +1595,6 @@ static int adv7604_get_edid(struct v4l2_subdev *sd, struct v4l2_subdev_edid *edi
 		return -EINVAL;
 	if (edid->start_block + edid->blocks > state->edid_blocks)
 		edid->blocks = state->edid_blocks - edid->start_block;
-	if (!edid->edid)
-		return -EINVAL;
 	memcpy(edid->edid + edid->start_block * 128,
 	       state->edid + edid->start_block * 128,
 	       edid->blocks * 128);
@@ -1625,8 +1623,6 @@ static int adv7604_set_edid(struct v4l2_subdev *sd, struct v4l2_subdev_edid *edi
 	}
 	if (edid->blocks > 2)
 		return -E2BIG;
-	if (!edid->edid)
-		return -EINVAL;
 	memcpy(state->edid, edid->edid, 128 * edid->blocks);
 	state->edid_blocks = edid->blocks;
 	state->aspect_ratio = v4l2_calc_aspect_ratio(edid->edid[0x15],

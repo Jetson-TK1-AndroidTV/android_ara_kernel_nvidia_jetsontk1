@@ -25,9 +25,6 @@
 #include <sound/initval.h>
 #include <sound/tlv.h>
 
-#define CONFIG_SND_HWDEP
-#define CONFIG_SND_HWDEP_MODULE
-
 #define RTK_IOCTL
 #ifdef RTK_IOCTL
 #if defined(CONFIG_SND_HWDEP) || defined(CONFIG_SND_HWDEP_MODULE)

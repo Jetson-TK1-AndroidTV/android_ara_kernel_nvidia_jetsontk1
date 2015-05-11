@@ -3709,6 +3709,7 @@ static struct snd_soc_codec_driver soc_codec_dev_rt5645 = {
 
 static const struct i2c_device_id rt5645_i2c_id[] = {
 	{ "rt5645", 0 },
+	{ "rt5647", 0 },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, rt5645_i2c_id);

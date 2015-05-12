@@ -2,3 +2,11 @@ config SND_SIMPLE_CARD
 	tristate "ASoC Simple sound card support"
 	help
 	  This option enables generic simple sound card support
+
+config SND_GB_AUDIO
+	bool "Support for Greybus audio"
+	select SND_SIMPLE_CARD
+	select SND_SOC_SPDIF
+	select SND_SOC_RT5645
+	help
+	  This option enabled support for Greybus audio

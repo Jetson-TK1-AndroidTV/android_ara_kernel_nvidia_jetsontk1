@@ -25,9 +25,6 @@
 #include <sound/initval.h>
 #include <sound/tlv.h>
 
-#define CONFIG_SND_HWDEP
-#define CONFIG_SND_HWDEP_MODULE
-
 #define RTK_IOCTL
 #ifdef RTK_IOCTL
 #if defined(CONFIG_SND_HWDEP) || defined(CONFIG_SND_HWDEP_MODULE)
@@ -3706,6 +3703,7 @@ static struct snd_soc_codec_driver soc_codec_dev_rt5645 = {
 
 static const struct i2c_device_id rt5645_i2c_id[] = {
 	{ "rt5645", 0 },
+	{ "rt5647", 0 },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, rt5645_i2c_id);

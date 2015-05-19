@@ -72,7 +72,7 @@ enum {
 	RT_GET_CODEC_ID = _IOR('R', 0x30, struct rt_codec_cmd),
 };
 
-int realtek_ce_init_hwdep(struct snd_soc_codec *codec);
+int rt5645_ce_init_hwdep(struct snd_soc_codec *codec);
 struct rt_codec_ops *rt_codec_get_ioctl_ops(void);
 
 #endif /* __RT56XX_IOCTL_H__ */

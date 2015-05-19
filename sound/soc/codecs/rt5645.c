@@ -3571,7 +3571,7 @@ static int rt5645_probe(struct snd_soc_codec *codec)
 	ioctl_ops->index_read = rt5645_index_read;
 	ioctl_ops->index_update_bits = rt5645_index_update_bits;
 	ioctl_ops->ioctl_common = rt5645_ioctl_common;
-	realtek_ce_init_hwdep(codec);
+	rt5645_ce_init_hwdep(codec);
 #endif
 #endif
 

@@ -146,6 +146,7 @@ obj-y                                   += panel-s-wqxga-10-1.o
 
 obj-${CONFIG_MACH_ARDBEG}               += board-ardbeg.o
 obj-${CONFIG_MACH_ARDBEG}               += board-ardbeg-sdhci.o
+obj-${CONFIG_MACH_ARDBEG}               += board-ardbeg-sata.o
 obj-${CONFIG_MACH_ARDBEG}               += board-ardbeg-sensors.o
 obj-${CONFIG_MACH_ARDBEG}               += board-ardbeg-panel.o
 obj-${CONFIG_MACH_ARDBEG}               += board-ardbeg-memory.o
@@ -187,6 +188,7 @@ obj-${CONFIG_MACH_LOKI}               	+= panel-j-720p-5.o
 
 obj-${CONFIG_MACH_LAGUNA}               += board-ardbeg.o
 obj-${CONFIG_MACH_LAGUNA}               += board-ardbeg-sdhci.o
+obj-${CONFIG_MACH_LAGUNA}               += board-ardbeg-sata.o
 obj-${CONFIG_MACH_LAGUNA}               += board-ardbeg-sensors.o
 obj-${CONFIG_MACH_LAGUNA}               += board-ardbeg-panel.o
 obj-${CONFIG_MACH_LAGUNA}               += board-laguna-power.o
